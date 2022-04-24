@@ -1,8 +1,11 @@
-<h1>Hey</h1>
+<!--<h1>Hey</h1>-->
+{{ titulo }}
+<hr/>
+<br/>
 
 <!---para renderizar variables en la plantilla --->
 
 <form method="POST" action="">{% csrf_token %}
-{{ the_form.as_p}}
+{{ the_form.as_p }}
 <input type="submit" value="Registrarse" />
 </form>
