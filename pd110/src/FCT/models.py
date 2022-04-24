@@ -10,7 +10,7 @@ class Registrado(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
 
     def __unicode__(self): #Python2
-        return self.nombre, self.apellido, self.email
+        return self.nombre
 
     def __str__(self): #Python3
-        return self.nombre, self.apellido, self.email
+        return self.nombre
