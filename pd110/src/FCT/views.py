@@ -33,7 +33,7 @@ def inicio(request):
        #registro = Registrado.objects.create(email=correo, nombre=usuario, apellido=userape)
 
     
-    return render(request, "inicio.html", context)
+    return render(request, "base.html", context)
 
 def contact(request):
 
