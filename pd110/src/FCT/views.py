@@ -1,6 +1,8 @@
 from multiprocessing import context
 from webbrowser import get
 from django.shortcuts import render
+from django.conf import settings
+from django.core.mail import send_mail
 
 from .forms import ContactForm, RegModelForm
 from .models import Registrado
@@ -39,18 +41,24 @@ def contact(request):
     if form.is_valid():
         #Formas de controlar el display
         #1.
-        # email = form.cleaned_data.get("email")
-        # nombre = form.cleaned_data.get("nombre")
-        # apellido = form.cleaned_data.get("apellido")
-        # mensaje = form.cleaned_data.get("mensaje")
-        # print (email, nombre, apellido, mensaje)
+         form_email = form.cleaned_data.get("email")
+         form_nombre = form.cleaned_data.get("nombre")
+         form_apellido = form.cleaned_data.get("apellido")
+         form_mensaje = form.cleaned_data.get("mensaje")
+         asunto = "Form de Contacto"
+         email_from = settings.EMAIL_HOST_USER
+         email_to = [email_from, "anotherone@gmail.com"]
+         email_mensaje = "{} {}:{} enviado por {}".format(form_nombre, form_apellido, form_mensaje, form_email)
+         
+         send_mail(asunto, email_mensaje, email_from, email_to, fail_silently=False)
+         print (form_email, form_nombre, form_apellido, form_mensaje)
         #2.
         # for key in form.changed_data:
         #     print(key)
         #     print(form.cleaned_data.get(key))
         #3.
-        for key, value in form.cleaned_data.iteritems():
-            print(key, value)
+        # for key, value in form.cleaned_data.iteritems():
+        #     print(key, value)
     context ={"form": form,}
 
     return render(request, "forms.html", context)
