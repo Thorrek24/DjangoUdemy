@@ -1,12 +1,13 @@
-<!--<h1>Hey</h1>-->
+{% extends "base.html" %}
+{% block head_tittle %} Bienvenido | {{ block.super}}{% endblock %}
 {{ titulo }}
 <hr/>
 <br/>
 
 <!---para renderizar variables en la plantilla --->
-<!--{% if form %}-->
+{% block content %}
 <form method="POST" action="">{% csrf_token %}
 {{ the_form.as_p }}
 <input type="submit" value="Registrarse" />
 </form>
-<!--{% endif %}-->
+{% enblock %}
