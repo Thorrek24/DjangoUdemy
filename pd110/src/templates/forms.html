@@ -4,9 +4,8 @@
 <br/>
 
 <!---para renderizar variables en la plantilla --->
-<!--{% if form %}-->
+
 <form method="POST" action="">{% csrf_token %}
-{{ the_form.as_p }}
+{{ form.as_p }}
 <input type="submit" value="Registrarse" />
 </form>
-<!--{% endif %}-->

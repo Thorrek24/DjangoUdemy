@@ -2,7 +2,7 @@ from multiprocessing import context
 from webbrowser import get
 from django.shortcuts import render
 
-from .forms import SignUp, RegModelForm
+from .forms import ContactForm, RegModelForm
 from .models import Registrado
 
 # Create your views here.
@@ -19,9 +19,9 @@ def inicio(request):
 
     if form.is_valid():
        instance = form.save(commit=False)
-       correo = form.cleaned_datadata.get("email")
-       usuario = form.cleaned_datadata.get("nombre")
-       userape = form.cleaned_datadata.get("apellido")
+       correo = form.cleaned_data.get("email")
+       usuario = form.cleaned_data.get("nombre")
+       userape = form.cleaned_data.get("apellido")
        if not instance.nombre:
            instance.nombre = "Usuario"
            instance.save()
@@ -32,3 +32,25 @@ def inicio(request):
 
     
     return render(request, "inicio.html", context)
+
+def contact(request):
+
+    form = ContactForm(request.POST or None)
+    if form.is_valid():
+        #Formas de controlar el display
+        #1.
+        # email = form.cleaned_data.get("email")
+        # nombre = form.cleaned_data.get("nombre")
+        # apellido = form.cleaned_data.get("apellido")
+        # mensaje = form.cleaned_data.get("mensaje")
+        # print (email, nombre, apellido, mensaje)
+        #2.
+        # for key in form.changed_data:
+        #     print(key)
+        #     print(form.cleaned_data.get(key))
+        #3.
+        for key, value in form.cleaned_data.iteritems():
+            print(key, value)
+    context ={"form": form,}
+
+    return render(request, "forms.html", context)

@@ -19,5 +19,6 @@ from django.urls import path
 from FCT import views
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('contact/', views.contact, name='contact'),
     path('inicio/', views.inicio, name='inicio')
 ]
